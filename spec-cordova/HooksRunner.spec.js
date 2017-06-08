@@ -30,6 +30,7 @@ var cordova = require('../src/cordova/cordova'),
     helpers = require('./helpers'),
     PluginInfo = require('cordova-common').PluginInfo,
     superspawn = require('cordova-common').superspawn,
+    events = require('cordova-common').events,
     config = require('../src/cordova/config');
 
 var platform = os.platform();
@@ -65,6 +66,12 @@ if(ext === 'bat') {
 shell.chmod('-R', 'ug+x', hooksDir);
 shell.chmod('-R', 'ug+x', hooksDirDot);
 shell.chmod('-R', 'ug+x', scriptsDir);
+
+// To get more verbose output to help trace program flow, uncomment the lines below
+// TODO: think about how to factor this out so that it can be invoked from the command line
+//events.on('log', function(msg) { console.log(msg); });
+//events.on('verbose', function(msg) { console.log(msg); });
+//events.on('warn', function(msg) { console.log(msg); });
 
 describe('HooksRunner', function() {
     var hooksRunner;
@@ -120,6 +127,7 @@ describe('HooksRunner', function() {
         // Add the testing platform.
         cordova.raw.platform('add', [helpers.testPlatform]).fail(function (err) {
             expect(err).toBeUndefined();
+            done();
         }).then(function () {
             // Add the testing plugin
             projectRoot = cordovaUtil.isCordova();
@@ -136,13 +144,14 @@ describe('HooksRunner', function() {
 
             cordova.raw.plugin('add', testPluginFixturePath).fail(function (err) {
                 expect(err && err.stack).toBeUndefined();
+                done();
             }).then(function () {
                 testPluginInstalledPath = path.join(projectRoot, 'plugins', 'com.plugin.withhooks');
                 shell.chmod('-R', 'ug+x', path.join(testPluginInstalledPath, 'scripts'));
                 done();
             });
         });
-    });
+    }, 100000);
 
     describe('fire method', function() {
         beforeEach(function() {
