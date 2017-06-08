@@ -22,7 +22,8 @@
 var Q = require('q'),
     cordova = require('../src/cordova/cordova');
 
-describe('callback wrapper', function() {
+// TODO: remove this file, and instead add unit tests for addModuleProperty to spec-cordova/util.spec.js
+xdescribe('callback wrapper', function() {
     var calls = ['prepare', 'build', 'create', 'emulate', 'plugin', 'platform', 'compile', 'run'];
     for (var i = 0; i < calls.length; i++) {
         var call = calls[i];
