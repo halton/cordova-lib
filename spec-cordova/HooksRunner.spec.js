@@ -30,7 +30,6 @@ var cordova = require('../src/cordova/cordova'),
     helpers = require('./helpers'),
     PluginInfo = require('cordova-common').PluginInfo,
     superspawn = require('cordova-common').superspawn,
-    events = require('cordova-common').events,
     config = require('../src/cordova/config');
 
 var platform = os.platform();
@@ -69,6 +68,7 @@ shell.chmod('-R', 'ug+x', scriptsDir);
 
 // To get more verbose output to help trace program flow, uncomment the lines below
 // TODO: think about how to factor this out so that it can be invoked from the command line
+//var events = require('cordova-common').events;
 //events.on('log', function(msg) { console.log(msg); });
 //events.on('verbose', function(msg) { console.log(msg); });
 //events.on('warn', function(msg) { console.log(msg); });
