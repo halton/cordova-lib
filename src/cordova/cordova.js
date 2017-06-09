@@ -52,7 +52,7 @@ exports = module.exports = {
     emulate: require('./emulate'),
     plugin: require('./plugin'),
     plugins: require('./plugin'),
-    serve: require('./serve'));
+    serve: require('./serve'),
     platform: require('./platform'),
     platforms: require('./platform'),
     compile: require('./compile'),

@@ -24,4 +24,4 @@ module.exports = function aliasMethodToRawWithDeprecationNotice(property, target
         cordova_events.emit('warn', 'Use of `' + component + '.raw.*` methods is deprecated and `' + component + '.raw` will be removed in a future release. Please migrate to using the top-level `' + component + '.*` methods instead.');
         targetObj[property].apply(targetObj, arguments);
     };
-}
+};

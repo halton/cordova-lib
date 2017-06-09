@@ -20,6 +20,7 @@
 // copyright (c) 2013 Andrew Lunny, Adobe Systems
 
 var events = require('cordova-common').events;
+var aliasMethodToRawWithDeprecationNotice = require('../util/alias');
 var Q = require('q');
 
 var plugman = {
@@ -50,7 +51,7 @@ var modulesToAlias = ['install', 'uninstall', 'fetch', 'browserify', 'help',
     'createpackagejson'];
 
 modulesToAlias.forEach(function(mod) {
-    aliasMethodToRawWithDeprecationNotice(mod, module.exports, 'plugman');
+    aliasMethodToRawWithDeprecationNotice(mod, plugman, 'plugman');
 });
 
 plugman.commands =  {

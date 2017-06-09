@@ -27,6 +27,7 @@ var fs            = require('fs'),
     nopt          = require('nopt'),
     Q             = require('q'),
     semver        = require('semver'),
+    aliasMethod   = require('../util/alias'),
     platforms     = require('../platforms/platforms');
 
 // Global configuration paths
@@ -55,14 +56,16 @@ Object.defineProperty(exports,'libDirectory', {
     }
 });
 
-addModuleProperty(module, 'plugin_parser', './plugin_parser');
-
+exports.plugin_parser = require('./plugin_parser');
+exports.raw = {};
+// Alias the plugin_parser method to the raw:{} object above.
+// Emits a deprecation warning if utilized, in prep for removal of `raw`.
+aliasMethod('plugin_parser', exports, 'cordova_util');
 exports.isCordova = isCordova;
 exports.cdProjectRoot = cdProjectRoot;
 exports.deleteSvnFolders = deleteSvnFolders;
 exports.listPlatforms = listPlatforms;
 exports.findPlugins = findPlugins;
-exports.addModuleProperty = addModuleProperty;
 exports.appDir = appDir;
 exports.projectWww = projectWww;
 exports.projectConfig = projectConfig;
